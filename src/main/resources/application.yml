@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: slovo
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  datasource:
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
