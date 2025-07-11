@@ -1,0 +1,62 @@
+Table language {
+  id int [pk, increment]
+  code varchar [not null, unique] // ISO code: 'en', 'uk', 'de'
+  name varchar [not null]         // e.g. 'English', 'Ukrainian'
+}
+
+Table user {
+  id int [pk, increment]
+  username varchar [not null, unique]
+  email varchar
+  created_at timestamp [default: `now()`]
+}
+
+Table user_language_pair {
+  id int [pk, increment]
+  user_id int [ref: > user.id]
+  source_id int [ref: > language.id] // source language
+  target_id int [ref: > language.id] // target language
+  is_default boolean [default: false]
+
+  indexes {
+    (user_id, is_default) [unique] // ensures max one default pair per user when is_default=true
+  }
+}
+
+Table word_group {
+  id int [pk, increment]
+  name varchar [not null]
+  user_id int [ref: > user.id]
+}
+
+Table slovo {
+  id int [pk, increment]
+  user_id int [ref: > user.id]
+  language_id int [ref: > language.id] // source language
+  text varchar [not null]
+  audio_url varchar
+  group_id int [ref: > word_group.id]
+  created_at timestamp [default: `now()`]
+  modified_at timestamp [default: `now()`]
+
+  indexes {
+    (user_id, text, language_id) [unique] // prevent duplicates per user per language
+  }
+}
+
+Table translation {
+  id int [pk, increment]
+  slovo_id int [ref: > slovo.id]
+  language_id int [ref: > language.id] // target language
+  part_of_speech varchar // e.g. noun, verb, adj
+  meaning varchar [not null] // translated meaning
+  example varchar
+}
+
+Table example_sentence {
+  id int [pk, increment]
+  slovo_id int [ref: > slovo.id]
+  language_id int [ref: > language.id] // language of the translation
+  sentence text [not null]
+  translation text
+}
