@@ -4,7 +4,7 @@ Table language {
   name varchar [not null]         // e.g. 'English', 'Ukrainian'
 }
 
-Table user {
+Table app_user {
   id int [pk, increment]
   username varchar [not null, unique]
   email varchar
