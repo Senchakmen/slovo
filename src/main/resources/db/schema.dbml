@@ -13,7 +13,7 @@ Table app_user {
 
 Table user_language_pair {
   id int [pk, increment]
-  user_id int [ref: > user.id]
+  user_id int [ref: > app_user.id]
   source_id int [ref: > language.id] // source language
   target_id int [ref: > language.id] // target language
   is_default boolean [default: false]
@@ -26,12 +26,12 @@ Table user_language_pair {
 Table word_group {
   id int [pk, increment]
   name varchar [not null]
-  user_id int [ref: > user.id]
+  user_id int [ref: > app_user.id]
 }
 
 Table slovo {
   id int [pk, increment]
-  user_id int [ref: > user.id]
+  user_id int [ref: > app_user.id]
   language_id int [ref: > language.id] // source language
   text varchar [not null]
   audio_url varchar
