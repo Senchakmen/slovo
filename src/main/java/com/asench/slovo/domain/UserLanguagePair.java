@@ -25,7 +25,7 @@ public class UserLanguagePair {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private AppUser user;
+    private AppUser appUser;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "source_id", nullable = false)
@@ -38,11 +38,11 @@ public class UserLanguagePair {
     @Column(name = "is_default", nullable = false)
     private boolean isDefault;
 
-    public UserLanguagePair(AppUser user, Language sourceLanguage, Language targetLanguage, boolean isDefault) {
-        Objects.requireNonNull(user);
+    public UserLanguagePair(AppUser appUser, Language sourceLanguage, Language targetLanguage, boolean isDefault) {
+        Objects.requireNonNull(appUser);
         Objects.requireNonNull(sourceLanguage);
         Objects.requireNonNull(targetLanguage);
-        this.user = user;
+        this.appUser = appUser;
         this.sourceLanguage = sourceLanguage;
         this.targetLanguage = targetLanguage;
         this.isDefault = isDefault;

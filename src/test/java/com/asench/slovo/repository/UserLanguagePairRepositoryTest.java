@@ -43,7 +43,7 @@ public class UserLanguagePairRepositoryTest extends RepositoryTestBase {
         UserLanguagePair result = pairRepo.findByIsDefaultTrueAndUser_Username(AppUserRepositoryTest.BASE_USERNAME).orElseThrow();
         var resultID = result.getId();
 
-        Assertions.assertEquals(result.getUser(), baseAppUser);
+        Assertions.assertEquals(result.getAppUser(), baseAppUser);
         Assertions.assertTrue(result.isDefault());
 
         pairRepo.delete(result);
