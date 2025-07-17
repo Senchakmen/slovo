@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserLanguagePairRepository extends CrudRepository<UserLanguagePair, Long> {
-    Optional<List<UserLanguagePair>> findByUser_Username(String username);
-    Optional<UserLanguagePair> findByIsDefaultTrueAndUser_Username(String username);
+    Optional<List<UserLanguagePair>> findByAppUser_Username(String username);
+    Optional<UserLanguagePair> findByIsDefaultTrueAndAppUser_Username(String username);
 }

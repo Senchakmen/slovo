@@ -3,6 +3,8 @@ package com.asench.slovo.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "word_group")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,4 +23,11 @@ public class WordGroup {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser appUser;
+
+    public WordGroup(String name, AppUser appUser) {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(appUser);
+        this.name = name;
+        this.appUser = appUser;
+    }
 }
